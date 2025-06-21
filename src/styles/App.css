@@ -1,0 +1,776 @@
+/* ==========================================================
+   🚐 TRANSPORTATION SCHEDULER STYLESHEET
+   Last updated: [Insert Date]
+   Organized and commented for clarity and maintenance
+========================================================== */
+
+
+/* ----------------------------------------------------------
+   🔧 BASE STYLES & RESET
+---------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.6;
+}
+
+
+/* ----------------------------------------------------------
+   🖼️ APP CONTAINER & MAIN LAYOUT
+---------------------------------------------------------- */
+.app-container,
+.admin-dashboard {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 1.5rem;
+  background-image: url('../assets/web-background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.main-content {
+  max-width: 64rem;
+  margin: 10% auto 0 auto;
+}
+
+
+/* ----------------------------------------------------------
+   🔐 ADMIN CORNER (Login/Settings Buttons)
+---------------------------------------------------------- */
+.admin-corner {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.admin-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+
+/* ----------------------------------------------------------
+   🏠 MAIN SECTION HEADINGS
+---------------------------------------------------------- */
+.main-section {
+  text-align: center;
+}
+
+.main-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.main-subtitle {
+  color: #6b7280;
+  margin-bottom: 3rem;
+  font-size: 1.125rem;
+}
+
+
+/* ----------------------------------------------------------
+   🏢 ORGANIZATION SELECT DROPDOWN
+---------------------------------------------------------- */
+.org-section {
+  margin-bottom: 3rem;
+}
+
+.org-label {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.org-dropdown {
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.org-dropdown:focus {
+  outline: none;
+  border-color: #3baef6;
+}
+
+
+/* ----------------------------------------------------------
+   🎯 ACTION BUTTON GROUPS
+---------------------------------------------------------- */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .action-buttons {
+    flex-direction: row;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   🏷️ SELECTED ORGANIZATION DISPLAY
+---------------------------------------------------------- */
+.selected-org {
+  margin: 1.5rem auto 0 auto;
+  padding: 1rem;
+  background-color: #dbeafe;
+  border: 1px solid #bfdbfe;
+  border-radius: 0.5rem;
+  max-width: 28rem;
+}
+
+.selected-org p {
+  color: #1e40af;
+}
+
+
+/* ----------------------------------------------------------
+   🔘 BUTTONS (All Styles)
+---------------------------------------------------------- */
+.btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-admin {
+  background-color: #1f2937;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.btn-admin:hover {
+  background-color: #111827;
+}
+
+.btn-primary,
+.btn-success {
+  background-color: #3baef6;
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  background-color: #294b94;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-large:hover {
+  transform: scale(1.05);
+}
+
+.btn-passenger,
+.btn-driver {
+  background-color: #25394b;
+  color: white;
+}
+
+.btn-passenger:hover,
+.btn-driver:hover {
+  background-color: #3baef6;
+}
+
+.btn-disabled {
+  background-color: #d1d5db !important;
+  color: #6b7280 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+
+/* ----------------------------------------------------------
+   🪟 MODAL STYLES
+---------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 64rem;
+  max-height: 90vh;
+  overflow: hidden;
+  margin: 1rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: #374151;
+}
+
+.modal-org-info {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.modal-org-info p {
+  color: #374151;
+}
+
+.modal-iframe {
+  border-radius: 0.5rem;
+}
+
+
+/* ----------------------------------------------------------
+   📋 ADMIN DASHBOARD STYLES
+---------------------------------------------------------- */
+.dashboard-container {
+  max-width: 112rem;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #000000
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #000000
+
+}
+
+
+/* ----------------------------------------------------------
+   📦 REQUEST + DRIVER ITEM STYLES
+---------------------------------------------------------- */
+.request-item,
+.driver-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.request-header,
+.driver-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.request-name,
+.driver-name {
+  font-weight: 500;
+}
+
+.request-detail,
+.driver-detail {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+
+/* ----------------------------------------------------------
+   🟢 SUBMISSION BADGES
+---------------------------------------------------------- */
+.submission-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+
+/* ----------------------------------------------------------
+   📱 RESPONSIVE DESIGN ADJUSTMENTS
+---------------------------------------------------------- */
+@media (max-width: 640px) {
+  .main-title { font-size: 2rem; }
+  .org-dropdown { max-width: 100%; }
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  .dashboard-actions { justify-content: center; }
+  .modal-container {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+  .modal-title { font-size: 1.25rem; }
+}
+
+
+/* ----------------------------------------------------------
+   🔐 ADMIN SIGN-IN MODAL
+---------------------------------------------------------- */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-body label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-body input {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  color: #000;
+  margin-top: 5px;
+}
+
+.modal-body input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.modal-body .btn-admin {
+  align-self: center;
+  margin-top: 10px;
+  padding: 15px 40px;
+  font-size: 16px;
+}
+
+.error-text {
+  color: #dc3545;
+  font-weight: bold;
+  text-align: center;
+  background: #f8d7da;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
+}
+
+
+/* ----------------------------------------------------------
+   🔐 LOGIN FORM STYLES
+---------------------------------------------------------- */
+.login-form {
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  background: white;
+  color: #000;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.error-message {
+  color: #dc3545;
+  font-weight: bold;
+  text-align: center;
+  background: #f8d7da;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.btn-secondary {
+  background-color: #878c92;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #5a6268;
+  transform: translateY(-1px);
+}
+
+.btn-secondary:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-tertiary {
+  background-color: #119b4a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-tertiary:hover:not(:disabled) {
+  background-color: #5a6268;
+  transform: translateY(-1px);
+}
+
+.btn-tertiary:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* ----------------------------------------------------------
+   📋 ASSIGNMENT MODAL
+---------------------------------------------------------- */
+
+.assignments-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+}
+
+.driver-assignment {
+  display: flex;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  color: #000;
+}
+
+.driver-info {
+  flex: 1;
+  padding-right: 20px;
+  border-right: 1px solid #eee;
+  color: #000;
+}
+
+.assigned-riders {
+  flex: 1;
+  padding-left: 20px;
+  color: #000;
+}
+
+.assigned-riders h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.rider-info {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  color: #000;
+}
+
+.no-passengers {
+  color: #000;
+  font-style: italic;
+}
+
+.unassigned-section {
+  margin-top: 30px;
+  color: #000;
+}
+
+.unassigned-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background: white;
+}
+
+.unassigned-request {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 4px;
+  color: #000;
+}
+
+.unassigned-request:last-child {
+  margin-bottom: 0;
+}
+
+/* Remove the old table styles since we're not using them anymore */
+.assignments-table,
+.table-header,
+.header-cell,
+.table-row,
+.table-cell,
+.driver-cell,
+.passenger-cell {
+  /* These can be removed or kept for other uses */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .driver-assignment {
+    flex-direction: column;
+  }
+  
+  .driver-info {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding-right: 0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .assigned-riders {
+    padding-left: 0;
+  }
+}
+
+/* Modal body scrolling */
+.modal-body {
+  flex: 1;
+  overflow: auto;
+  max-height: calc(90vh - 200px);
+}
+
+/* Unassigned section styling - red theme */
+.unassigned-section h3 {
+  color: #c62828;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.unassigned-container.alert {
+  border: 2px solid #f44336;
+  background-color: #ffebee;
+}
+
+.unassigned-request.alert {
+  background-color: #ffcdd2;
+  border: 1px solid #f44336;
+  border-radius: 4px;
+}
+
+/* Success message for no unassigned requests */
+.no-unassigned-success {
+  background-color: #c8e6c9;
+  border: 1px solid #4caf50;
+  border-radius: 4px;
+  padding: 15px;
+  text-align: center;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+/* Date Selection Styles */
+.date-selection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.date-label {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.date-dropdown {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.date-dropdown:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.date-dropdown:hover {
+  border-color: #007bff;
+}
+
+/* Update dashboard header to accommodate date selection */
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .date-selection {
+    margin: 0;
+  }
+}
