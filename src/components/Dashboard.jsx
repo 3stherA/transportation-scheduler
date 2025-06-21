@@ -72,8 +72,8 @@ const Dashboard = ({ authenticatedOrgName, onBackToMain, onSignOut }) => {
     
     try {
       const [rideRes, driverRes] = await Promise.all([
-        axios.get(`https://transportation-scheduler-production.up.railway.app/ride-requests?date=${encodeURIComponent(apiDate)}`),
-        axios.get(`https://transportation-scheduler-production.up.railway.app/driver-registrations?date=${encodeURIComponent(apiDate)}`),
+        axios.get(`https://transportation-scheduler-backend-production.up.railway.app//ride-requests?date=${encodeURIComponent(apiDate)}`),
+        axios.get(`https://transportation-scheduler-backend-production.up.railway.app//driver-registrations?date=${encodeURIComponent(apiDate)}`),
       ]);
 
       console.log(`Found ${rideRes.data.length} ride requests, ${driverRes.data.length} drivers`);
@@ -99,7 +99,7 @@ const Dashboard = ({ authenticatedOrgName, onBackToMain, onSignOut }) => {
     console.log(`Creating assignments for ${selectedDate} (API format: ${apiDate})`);
     
     try {
-      const response = await axios.get(`https://transportation-scheduler-production.up.railway.app/assignments?date=${encodeURIComponent(apiDate)}`);
+      const response = await axios.get(`https://transportation-scheduler-backend-production.up.railway.app//assignments?date=${encodeURIComponent(apiDate)}`);
       const { assignedDrivers = [], unassignedRequests = [] } = response.data;
       
       console.log(`Found ${assignedDrivers.length} assigned drivers, ${unassignedRequests.length} unassigned requests`);
